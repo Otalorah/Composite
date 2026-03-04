@@ -27,29 +27,27 @@ public class Main {
       Input  input  = interfaceFactory.createInput();
       Output output = interfaceFactory.createOutput();
 
-      System.out.println("Enter a number to echo back through the selected interface:");
+      output.show("Enter a number to echo back through the selected interface:");
       String value = input.read();
       output.show("You entered: " + value);
-
-      System.out.println();
 
       RPGCharacterBuilder builder = new RPGCharacterBuilder();
       CharacterDirector director = new CharacterDirector(builder);
 
       // --- Builder Pattern: create predefined characters ---
-      System.out.println("=== Builder Pattern Demo ===");
+      output.show("=== Builder Pattern Demo ===");
 
       Character tank = director.createTank("Arthas");
-      System.out.println("Tank created: " + tank);
+      output.show("Tank created: " + tank);
 
       Character rogue = director.createRogue("Zara");
-      System.out.println("Rogue created: " + rogue);
+      output.show("Rogue created: " + rogue);
 
       Character mage = director.createCharacter("Gandalf", "Mage");
-      System.out.println("Mage created: " + mage);
+      output.show("Mage created: " + mage);
 
       // --- Composite Pattern: build an EquipmentSet ---
-      System.out.println("\n=== Composite Pattern Demo ===");
+      output.show("\n=== Composite Pattern Demo ===");
 
       EquipmentSet dragonSet = new EquipmentSet(
             "Dragon Set",
@@ -60,8 +58,8 @@ public class Main {
       dragonSet.addComponent(new Equipment("Dragon Chest", Map.of("defense", 25, "health", 20), "chest"));
       dragonSet.addComponent(new Equipment("Dragon Greaves", Map.of("defense", 10, "speed", 5), "legs"));
 
-      System.out.println("Set complete: " + dragonSet.isComplete());
-      System.out.println("Dragon Set total stats: " + dragonSet.getStats());
+      output.show("Set complete: " + dragonSet.isComplete());
+      output.show("Dragon Set total stats: " + dragonSet.getStats());
 
       Character warrior = builder
             .setBasicInfo("Siegfried", "Warrior")
@@ -71,18 +69,18 @@ public class Main {
             .addSkill(new Skill("Sword Slash", 50, 10, "physical"))
             .build();
 
-      System.out.println("Warrior total stats: " + warrior.getTotalStats());
+      output.show("Warrior total stats: " + warrior.getTotalStats());
 
       // --- Prototype Pattern: clone a character ---
-      System.out.println("\n=== Prototype Pattern Demo ===");
+      output.show("\n=== Prototype Pattern Demo ===");
 
       Character warriorClone = warrior.clone();
       warriorClone.setLevel(11);
       warriorClone.setState("name=Siegfried II");
 
-      System.out.println("Original warrior key : " + warrior.getKey());
-      System.out.println("Cloned  warrior key  : " + warriorClone.getKey());
-      System.out.println("Cloned  warrior stats: " + warriorClone.getTotalStats());
+      output.show("Original warrior key : " + warrior.getKey());
+      output.show("Cloned  warrior key  : " + warriorClone.getKey());
+      output.show("Cloned  warrior stats: " + warriorClone.getTotalStats());
    }
 
    // ---------------------------------------------------------------
@@ -119,7 +117,7 @@ public class Main {
             yield new GUIFactory();
          }
          case 3  -> {
-            System.out.println("→ Using WebFactory (HTTP on localhost:8080 / :8081)");
+            System.out.println("→ Using WebFactory (HTTP on localhost:8080?value=Int (Input) / :8081 (Reload to see Output))");
             yield new WebFactory();
          }
          default -> {

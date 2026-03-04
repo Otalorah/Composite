@@ -12,11 +12,6 @@ public class AdapterWebOutput implements Output {
 
     @Override
     public void show(String data) {
-        try {
-            adaptee.show(Integer.parseInt(data.trim()));
-        } catch (NumberFormatException e) {
-            // If the data is not a plain integer, hash its length as a numeric proxy
-            adaptee.show(data.length());
-        }
+        adaptee.show(data);
     }
 }

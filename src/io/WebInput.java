@@ -24,7 +24,6 @@ public class WebInput {
      * parameter received, or 0 if none is found / an error occurs.
      */
     public int read() {
-        System.out.println("[Web] Listening on http://localhost:" + PORT + "/?value=<number>");
         try (ServerSocket server = new ServerSocket(PORT);
              Socket client = server.accept();
              BufferedReader reader = new BufferedReader(
@@ -40,7 +39,7 @@ public class WebInput {
                 return Integer.parseInt(valueStr.trim());
             }
         } catch (IOException | NumberFormatException e) {
-            System.err.println("[Web] Input error: " + e.getMessage());
+            // silently ignore
         }
         return 0;
     }
